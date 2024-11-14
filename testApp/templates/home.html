@@ -1,14 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Hello, world!</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="" />
-  <link rel="icon" href="favicon.png">
-  <meta name="theme-color" content="#f0b056">
-</head>
-<body>
-  <h1>Hello, world!</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}Home - SHPE @ UTRGV{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+            <h1 class="display-4 mb-4">Welcome to the Vaquero SHPE Portal</h1>
+            
+            {% if user.is_authenticated %}
+                <div class="alert alert-success mb-4" role="alert">
+                    <h4 class="alert-heading">Hello, {{ user.username }}! 👋</h4>
+                    <p class="mb-0">We're glad to have you back.</p>
+                </div>
+            {% else %}
+                <div class="alert alert-info mb-4" role="alert">
+                    <h4 class="alert-heading">Welcome, Guest! 👋</h4>
+                    <p class="mb-0">Please <a href="{% url 'login' %}" class="alert-link">login</a> or <a href="{% url 'register' %}" class="alert-link">register</a> to access all features.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Featured Content Section -->
+    <div class="row mt-5">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">About SHPE</h5>
+                    <p class="card-text">The Society of Hispanic Professional Engineers (SHPE) changes lives by empowering the Hispanic community to realize its fullest potential.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Upcoming Events</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">📅 General Meeting - Thursday 5 PM</li>
+                        <li class="mb-2">🌟 Professional Workshop - Next Tuesday</li>
+                        <li>🤝 Networking Event - Coming Soon</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Quick Links</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="#" class="text-decoration-none">Member Resources</a></li>
+                        <li class="list-group-item"><a href="#" class="text-decoration-none">Calendar</a></li>
+                        <li class="list-group-item"><a href="#" class="text-decoration-none">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action Section -->
+    <div class="row mt-4">
+        <div class="col-12 text-center">
+            <div class="p-5 bg-light rounded">
+                <h2 class="mb-3">Get Involved!</h2>
+                <p class="lead mb-4">Join SHPE @ UTRGV and become part of a community dedicated to empowering Hispanic engineers.</p>
+                {% if not user.is_authenticated %}
+                    <a href="{% url 'register' %}" class="btn btn-primary btn-lg">Join Now</a>
+                {% else %}
+                    <a href="#" class="btn btn-primary btn-lg">View Member Dashboard</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
