@@ -3,6 +3,8 @@
 This project is a Django-based web application designed for local SHPE (Society of Hispanic Professional Engineers) chapter members. 
 The portal allows members to track their status, including membership activity, dues payments, and eligibility for chapter-related scholarships.
 
+![UTRGV_SHPE_Home](./images/RGV_SHPE_Home.png)
+
 ## Usage
 
 - **Member Registration**: Members can sign up and log in to view their status.
