@@ -1,1 +1,3 @@
 virtual
+./fall3340/__pycache__
+*.pyc
