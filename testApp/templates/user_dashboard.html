@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="mb-4">{{ user.username }}'s Profile Dashboard</h1>
+    
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <!-- University Major Dropdown -->
+        <div class="mb-3">
+            <label for="university_major" class="form-label">University Major</label>
+            <select id="university_major" name="university_major" class="form-select">
+                <option value="">Select Your Major</option>
+                <optgroup label="Engineering Majors">
+                    <option value="mechanical_engineering">Mechanical Engineering</option>
+                    <option value="electrical_engineering">Electrical Engineering</option>
+                    <option value="civil_engineering">Civil Engineering</option>
+                    <option value="aerospace_engineering">Aerospace Engineering</option>
+                    <option value="chemical_engineering">Chemical Engineering</option>
+                </optgroup>
+                <optgroup label="Computer Science Majors">
+                    <option value="computer_science">Computer Science</option>
+                    <option value="software_engineering">Software Engineering</option>
+                    <option value="computer_engineering">Computer Engineering</option>
+                    <option value="data_science">Data Science</option>
+                    <option value="cybersecurity">Cybersecurity</option>
+                </optgroup>
+            </select>
+        </div>
+        
+        <!-- Classification Dropdown with Dynamic Other Field -->
+        <div class="mb-3">
+            <label for="classification" class="form-label">Classification</label>
+            <select id="classification" name="classification" class="form-select" onchange="toggleOtherClassification()">
+                <option value="">Select Your Classification</option>
+                <option value="1st_year">1st Year</option>
+                <option value="2nd_year">2nd Year</option>
+                <option value="3rd_year">3rd Year</option>
+                <option value="4th_year">4th Year</option>
+                <option value="other">Other</option>
+            </select>
+            
+            <!-- Other Classification Text Field (Initially Hidden) -->
+            <input type="text" 
+                   id="other_classification" 
+                   name="other_classification" 
+                   class="form-control mt-2 d-none" 
+                   placeholder="Enter Your Classification">
+        </div>
+        
+        <!-- Proof of Travel File Upload -->
+        <div class="mb-3">
+            <label for="travel_proof" class="form-label">Proof of Travel</label>
+            <input type="file" 
+                   id="travel_proof" 
+                   name="travel_proof" 
+                   accept="image/jpeg,image/png,image/gif" 
+                   class="form-control"
+                   data-max-file-size="5MB">
+            <div class="form-text">
+                Max file size: 5MB. Accepted formats: JPEG, PNG, GIF
+            </div>
+        </div>
+        
+        <!-- Bulk Registration Dropdown -->
+        <div class="mb-3">
+            <label for="bulk_registration" class="form-label">Bulk Registration</label>
+            <select id="bulk_registration" name="bulk_registration" class="form-select">
+                <option value="">Select Option</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+        
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Save Profile</button>
+    </form>
+</div>
+
+<script>
+function toggleOtherClassification() {
+    const classificationSelect = document.getElementById('classification');
+    const otherClassificationInput = document.getElementById('other_classification');
+    
+    if (classificationSelect.value === 'other') {
+        otherClassificationInput.classList.remove('d-none');
+        otherClassificationInput.required = true;
+    } else {
+        otherClassificationInput.classList.add('d-none');
+        otherClassificationInput.required = false;
+        otherClassificationInput.value = '';
+    }
+}
+</script>
+{% endblock %}
